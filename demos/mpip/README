@@ -1,0 +1,5 @@
+For demo of Tool Gear's GUI for MpiP (light-weight MPI profiling tool,
+www.llnl.gov/CASC/mpip), run in demos/mpip:
+
+./mpipview irs.mpiP
+

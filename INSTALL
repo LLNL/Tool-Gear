@@ -1,0 +1,67 @@
+Installation Instructions
+-------------------------
+
+The Tool Gear infrastructure, and most of the tools built using Tool Gear,
+uses Qt's qmake program to build its Makefiles and uses same the compiler 
+configuration used to build Qt.  There is no separate configuration proceedure
+for Tool Gear.
+
+To build Tool Gear 2.00-based tools, you must have Qt 3.3.1 or later (but not
+QT 4) in your path and its environment variables (i.e., QTDIR) set up properly.
+Qt is available for free from www.trolltech.com.
+Tested and works for "free" and "licensed" Qt 3.3.1, 3.3.2, and 3.3.3 on
+AIX, linux, and tru64.  Not compatible with earlier Qt versions and not 
+currently compatible with Qt 4.  Qt 3.3.3 or later is recommended with Mac OS. 
+
+On AIX/xlC, we recommend configuring Qt to build everything with 
+-qstaticinline.  This will remove most duplicate symbol warnings (which are
+typically harmless) but will result in somewhat larger executables.
+
+Tool Gear 2.00 provides several independent tools that can be downloaded
+in separate tar balls or all together in one tar ball.   The makefiles 
+attempt to build only the tools found and silently ignores those not 
+included in the tar ball.
+
+The tool DynTG (if present) will currently only attempt to compile on 
+AIX platform's with DPCL installed.
+
+The default 'all' target places all the binaries and scripts in the bin
+directory.   The scripts (mpipview, memcheckview, umpireview, dyntg, etc.) 
+are modified during the install process to set TGROOT to the root directory 
+of where the tools are built (so will have to be edited if you are moving 
+the binaries/scripts).
+
+The 'install' target is intended for publically visible installations of the 
+tools ONLY and by default places links into /usr/local/bin.
+
+The 'install' target does a 'make all' and then recursively 
+changes permission (chmod -R go+rX) on the main diretory of where the 
+tools are built (the directory created by the tarball, such as 
+Toolgear_2.00, mpipview_2.00, etc.).  The 'install' target then runs 
+the install_links script in the bin directory, which installs links to the 
+tool scripts present into /usr/local/bin (by default).
+The install target can be changed by modifying TARGET_DIR in bin/install_links
+before typing 'make install'.
+
+It is also possible to do a public install by hand (basically by linking to 
+the scripts, not executables, in the bin directory and changing the
+permissions appropriately.)  This was the installation model for earlier
+versions of Tool Gear (but was changed by user request).
+
+The build and install process assumes that the ./bin directory will not
+be deleted or moved after the build process (hard codes paths to this bin
+directory in the tool scripts).  
+
+You may run 'make clean' to conserve space without deleting the built binaries.
+There is no automated way to delete the binaries in the bin directory.
+
+You may delete all but the ./bin and ./dynTG_extensions directories (if 
+present), if you want to minimize the installation footprint.
+
+You may run 'make' in the main directory or in the src directory.   
+
+Run the tools scripts in the ./bin directory with no options for 
+usage information.
+
+Please direct questions, bug reports, and feedback on the build system to
+either John Gyllenhaal (gyllen@llnl.gov) or John May (johnmay@llnl.gov)

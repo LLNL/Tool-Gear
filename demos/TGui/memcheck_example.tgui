@@ -1,0 +1,1436 @@
+<tool_gear><format>1</format><version>2.00</version>
+
+<tool_title>MemcheckView - xml5.vertex0.0.mc</tool_title>
+
+<status>Reading in xml5.vertex0.0.mc</status>
+
+<about>
+  <prepend>Tool Gear 2.00's Valgrind Memcheck View GUI
+Written (using Tool Gear's XML interface) by John Gyllenhaal</prepend>
+</about>
+
+<message_folder>
+  <tag>all_in_order</tag>
+  <title>Combined memcheck output (in output order)</title>
+  <if_empty>show</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>all_by_count</tag>
+  <title>  Error Message counts (all error categories)</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>InvalidWrite</tag>
+  <title>  Write of an invalid address</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>InvalidRead</tag>
+  <title>  Read of an invalid address</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>InvalidJump</tag>
+  <title>  Jump to an invalid address</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>InvalidFree</tag>
+  <title>  free/delete/delete[] on an invalid pointer</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>MismatchedFree</tag>
+  <title>  free/delete/delete[] does not match allocation function</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>UninitCondition</tag>
+  <title>  Conditional jump/move depends on undefined value</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>UninitValue</tag>
+  <title>  Other use of undefined value (primarily memory addresses)</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>Overlap</tag>
+  <title>  Args overlap each other or are otherwise bogus</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>SyscallParam</tag>
+  <title>  System call params are undefined or point to undefed/unaddressible memory</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>InvalidMemPool</tag>
+  <title>  Invalid mem pool specified in client request</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>ClientCheck</tag>
+  <title>  Errors resulting from a client check request</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>Leak_DefinitelyLost</tag>
+  <title>  Memory leak (the referenced blocks are definately lost)</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>Leak_IndirectlyLost</tag>
+  <title>  Indirect memory Leak (all pointers to the referenced blocks are only in leaked blocks)</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>Leak_PossiblyLost</tag>
+  <title>  Possible memory leak (only interior pointers to referenced blocks were found)</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>Leak_StillReachable</tag>
+  <title>  Unfreed memory leak (pointers to un-freed blocks are still available)</title>
+  <if_empty>hide</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>memcheck_status</tag>
+  <title>  Memcheck status</title>
+  <if_empty>show</if_empty>
+</message_folder>
+
+<message_folder>
+  <tag>memcheck_invocation</tag>
+  <title>  Valgrind's memcheck tool copyright and invocation information</title>
+  <if_empty>show</if_empty>
+</message_folder>
+
+<site_priority>
+  <file>vg_replace_malloc.c$</file>  <modifier>-1.0</modifier></site_priority>
+
+<site_priority>
+  <file>^$</file>  <modifier>-10.0</modifier></site_priority>
+
+<about>
+  <append>Memcheck, a memory error detector.
+Copyright (C) 2002-2005, and GNU GPL&apos;d, by Julian Seward et al.
+Using LibVEX rev 1600, a library for dynamic binary translation.
+Copyright (C) 2004-2005, and GNU GPL&apos;d, by OpenWorks LLP.
+Using valgrind-3.2.0.SVN-1600-5778, a dynamic binary instrumentation framework.
+Copyright (C) 2000-2005, and GNU GPL&apos;d, by Julian Seward et al.
+</append>
+</about>
+
+<message>
+  <folder>memcheck_invocation</folder>
+  <heading>Memcheck Copyright Notice</heading>
+  <body>Memcheck, a memory error detector.
+Copyright (C) 2002-2005, and GNU GPL&apos;d, by Julian Seward et al.
+Using LibVEX rev 1600, a library for dynamic binary translation.
+Copyright (C) 2004-2005, and GNU GPL&apos;d, by OpenWorks LLP.
+Using valgrind-3.2.0.SVN-1600-5778, a dynamic binary instrumentation framework.
+Copyright (C) 2000-2005, and GNU GPL&apos;d, by Julian Seward et al.
+</body>
+</message>
+
+<message>
+  <folder>memcheck_invocation</folder>
+  <heading>pid 18066</heading>
+</message>
+
+<message>
+  <folder>memcheck_invocation</folder>
+  <heading>ppid 18049</heading>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>memcheck_status</folder>
+  <heading>  --- Started: Fri Apr 28 13:19:50 PDT 2006 on vertex0 ---</heading>
+  <annot>
+    <title>Started</title>
+    <site><desc>Fri Apr 28 13:19:50 PDT 2006 on vertex0</desc></site>
+  </annot>
+</message>
+
+<message>
+  <folder>memcheck_invocation</folder>
+  <heading>Valgrind's Invocation Info</heading>
+  <body>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/bin/valgrind 
+  --tool=memcheck
+  --xml=yes
+  --log-file-exactly=xml5.vertex0.0.mc
+  -v
+  --workaround-gcc296-bugs=yes
+  --error-limit=no
+  --leak-check=full
+  --show-reachable=yes
+  --xml-user-comment=&lt;hostname&gt;vertex0&lt;/hostname&gt;&lt;date&gt;Fri Apr 28 13:19:50 PDT 2006&lt;/date&gt;</body>
+  <annot>
+    <title>Valgrind's Invocation Info</title>
+    <site>
+      <desc>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/bin/valgrind --tool=memcheck --xml=yes \</desc>
+   </site>
+   <site>
+     <desc>--log-file-exactly=xml5.vertex0.0.mc -v --workaround-gcc296-bugs=yes --error-limit=no --leak-check=full \</desc>
+   </site>
+   <site>
+     <desc>--show-reachable=yes \</desc>
+   </site>
+   <site>
+     <desc>--xml-user-comment=&lt;hostname&gt;vertex0&lt;/hostname&gt;&lt;date&gt;Fri Apr 28 13:19:50 PDT 2006&lt;/date&gt;</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>memcheck_invocation</folder>
+  <heading>Application's Invocation Info</heading>
+  <body>xml5 
+  (no arguments)</body>
+  <annot>
+    <title>Application's Invocation Info</title>
+    <site>
+      <desc>xml5</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <heading>Valgrind's Memcheck Tool Copyright and Invocation Information</heading>
+  <body>Memcheck, a memory error detector.
+Copyright (C) 2002-2005, and GNU GPL&apos;d, by Julian Seward et al.
+Using LibVEX rev 1600, a library for dynamic binary translation.
+Copyright (C) 2004-2005, and GNU GPL&apos;d, by OpenWorks LLP.
+Using valgrind-3.2.0.SVN-1600-5778, a dynamic binary instrumentation framework.
+Copyright (C) 2000-2005, and GNU GPL&apos;d, by Julian Seward et al.
+
+pid 18066
+ppid 18049
+
+Valgrind's Invocation Info:
+/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/bin/valgrind
+  --tool=memcheck
+  --xml=yes
+  --log-file-exactly=xml5.vertex0.0.mc
+  -v
+  --workaround-gcc296-bugs=yes
+  --error-limit=no
+  --leak-check=full
+  --show-reachable=yes
+  --xml-user-comment=&lt;hostname&gt;vertex0&lt;/hostname&gt;&lt;date&gt;Fri Apr 28 13:19:50 PDT 2006&lt;/date&gt;
+
+Application's Invocation Info:
+xml5
+  (no arguments)</body>
+  <annot>
+    <title>Application's Invocation Info</title>
+    <site>
+      <desc>xml5</desc>
+    </site>
+  </annot>
+  <annot>
+    <title>Valgrind's Invocation Info</title>
+    <site>
+      <desc>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/bin/valgrind --tool=memcheck --xml=yes \</desc>
+   </site>
+   <site>
+     <desc>--log-file-exactly=xml5.vertex0.0.mc -v --workaround-gcc296-bugs=yes --error-limit=no --leak-check=full \</desc>
+   </site>
+   <site>
+     <desc>--show-reachable=yes \</desc>
+   </site>
+   <site>
+     <desc>--xml-user-comment=&lt;hostname&gt;vertex0&lt;/hostname&gt;&lt;date&gt;Fri Apr 28 13:19:50 PDT 2006&lt;/date&gt;</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>memcheck_status</folder>
+  <heading>  --- Status: RUNNING   00:00:00:00.153 ---</heading>
+  <annot>
+    <title>Status</title>
+    <site><desc>RUNNING   00:00:00:00.153</desc></site>
+  </annot>
+</message>
+
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>InvalidRead</folder>
+  <heading>Invalid read of size 4                                               frame3() (xml5.cpp:16)</heading>
+  <body>  at 0x4007E3: frame3() (xml5.cpp:16)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+Address 0x51D105C is 4 bytes after a block of size 40 alloc&apos;d
+  at 0x4A1895E: malloc (vg_replace_malloc.c:149)
+  by 0x4007CA: frame3() (xml5.cpp:13)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Invalid read of size 4</title>
+    <site>
+      <file>xml5.cpp</file>
+      <line>16</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+  <annot>
+    <title>Address 0x51D105C is 4 bytes after a block of size 40 alloc&apos;d</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>149</line>
+      <desc>malloc</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>13</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>UninitCondition</folder>
+  <heading>Conditional jump or move depends on uninitialised value(s)           frame3() (xml5.cpp:27)</heading>
+  <body>  at 0x40082E: frame3() (xml5.cpp:27)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Conditional jump or move depends on uninitialised value(s)</title>
+    <site>
+      <file>xml5.cpp</file>
+      <line>27</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>UninitValue</folder>
+  <heading>Use of uninitialised value of size 8                                 frame3() (xml5.cpp:37)</heading>
+  <body>  at 0x400879: frame3() (xml5.cpp:37)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Use of uninitialised value of size 8</title>
+    <site>
+      <file>xml5.cpp</file>
+      <line>37</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>InvalidFree</folder>
+  <heading>Invalid free() / delete / delete[]                                   frame3() (xml5.cpp:42)</heading>
+  <body>  at 0x4A190DA: free (vg_replace_malloc.c:222)
+  by 0x400890: frame3() (xml5.cpp:42)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+Address 0x51D1030 is 0 bytes inside a block of size 40 free&apos;d
+  at 0x4A190DA: free (vg_replace_malloc.c:222)
+  by 0x400887: frame3() (xml5.cpp:41)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Invalid free() / delete / delete[]</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>222</line>
+      <desc>free</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>42</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+  <annot>
+    <title>Address 0x51D1030 is 0 bytes inside a block of size 40 free&apos;d</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>222</line>
+      <desc>free</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>41</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>InvalidFree</folder>
+  <heading>Invalid free() / delete / delete[]                                   frame3() (xml5.cpp:46)</heading>
+  <body>  at 0x4A190DA: free (vg_replace_malloc.c:222)
+  by 0x4008A3: frame3() (xml5.cpp:46)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Invalid free() / delete / delete[]</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>222</line>
+      <desc>free</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>46</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>MismatchedFree</folder>
+  <heading>Mismatched free() / delete / delete []                               frame3() (xml5.cpp:63)</heading>
+  <body>  at 0x4A192A8: operator delete(void*) (vg_replace_malloc.c:229)
+  by 0x400947: frame3() (xml5.cpp:63)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+Address 0x51D19A8 is 0 bytes inside a block of size 396 alloc&apos;d
+  at 0x4A18D27: operator new[](unsigned long) (vg_replace_malloc.c:188)
+  by 0x40093A: frame3() (xml5.cpp:62)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Mismatched free() / delete / delete []</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>229</line>
+      <desc>operator delete(void*)</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>63</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+  <annot>
+    <title>Address 0x51D19A8 is 0 bytes inside a block of size 396 alloc&apos;d</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>188</line>
+      <desc>operator new[](unsigned long)</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>62</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>InvalidRead</folder>
+  <heading>Invalid read of size 4                                               frame3() (xml5.cpp:19)</heading>
+  <body>  at 0x4007F9: frame3() (xml5.cpp:19)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+Address 0x51D1B94 is 4 bytes after a block of size 40 alloc&apos;d
+  at 0x4A1895E: malloc (vg_replace_malloc.c:149)
+  by 0x4007CA: frame3() (xml5.cpp:13)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Invalid read of size 4</title>
+    <site>
+      <file>xml5.cpp</file>
+      <line>19</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+  <annot>
+    <title>Address 0x51D1B94 is 4 bytes after a block of size 40 alloc&apos;d</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>149</line>
+      <desc>malloc</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>13</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>InvalidRead</folder>
+  <heading>Invalid read of size 4                                               frame3() (xml5.cpp:22)</heading>
+  <body>  at 0x400811: frame3() (xml5.cpp:22)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+Address 0x51D2500 is 8 bytes after a block of size 40 alloc&apos;d
+  at 0x4A1895E: malloc (vg_replace_malloc.c:149)
+  by 0x4007CA: frame3() (xml5.cpp:13)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Invalid read of size 4</title>
+    <site>
+      <file>xml5.cpp</file>
+      <line>22</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+  <annot>
+    <title>Address 0x51D2500 is 8 bytes after a block of size 40 alloc&apos;d</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>149</line>
+      <desc>malloc</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>13</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>SyscallParam</folder>
+  <heading>Syscall param exit_group(exit_code) contains uninitialised byte(s)   _Exit (in /lib64/tls/libc-2.3.4.so)</heading>
+  <body>  at 0x502C4DA: _Exit (in /lib64/tls/libc-2.3.4.so)
+  by 0x4FCDCBA: exit (in /lib64/tls/libc-2.3.4.so)
+  by 0x4FB94C1: (below main) (in /lib64/tls/libc-2.3.4.so)
+</body>
+  <annot>
+    <title>Syscall param exit_group(exit_code) contains uninitialised byte(s)</title>
+    <site>
+      <desc>_Exit</desc>
+    </site>
+    <site>
+      <desc>exit</desc>
+    </site>
+    <site>
+      <desc>(below main)</desc>
+    </site>
+  </annot>
+</message>
+<message>
+  <folder>all_in_order</folder>
+  <folder>memcheck_status</folder>
+  <heading>  --- ERROR SUMMARY: 43 errors from 9 contexts ---</heading>
+  <annot>
+    <title>Error Summary</title>
+    <site><desc>43 errors from 9 contexts</desc></site>
+  </annot>
+</message>
+
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>all_by_count</folder>
+  <heading>   15 - Conditional jump or move depends on uninitialised value(s)           frame3() (xml5.cpp:27)</heading>
+  <body>  at 0x40082E: frame3() (xml5.cpp:27)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Conditional jump or move depends on uninitialised value(s)</title>
+    <site>
+      <file>xml5.cpp</file>
+      <line>27</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>all_by_count</folder>
+  <heading>    5 - Invalid read of size 4                                               frame3() (xml5.cpp:16)</heading>
+  <body>  at 0x4007E3: frame3() (xml5.cpp:16)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+Address 0x51D105C is 4 bytes after a block of size 40 alloc&apos;d
+  at 0x4A1895E: malloc (vg_replace_malloc.c:149)
+  by 0x4007CA: frame3() (xml5.cpp:13)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Invalid read of size 4</title>
+    <site>
+      <file>xml5.cpp</file>
+      <line>16</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+  <annot>
+    <title>Address 0x51D105C is 4 bytes after a block of size 40 alloc&apos;d</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>149</line>
+      <desc>malloc</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>13</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>all_by_count</folder>
+  <heading>    5 - Use of uninitialised value of size 8                                 frame3() (xml5.cpp:37)</heading>
+  <body>  at 0x400879: frame3() (xml5.cpp:37)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Use of uninitialised value of size 8</title>
+    <site>
+      <file>xml5.cpp</file>
+      <line>37</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>all_by_count</folder>
+  <heading>    5 - Invalid free() / delete / delete[]                                   frame3() (xml5.cpp:42)</heading>
+  <body>  at 0x4A190DA: free (vg_replace_malloc.c:222)
+  by 0x400890: frame3() (xml5.cpp:42)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+Address 0x51D1030 is 0 bytes inside a block of size 40 free&apos;d
+  at 0x4A190DA: free (vg_replace_malloc.c:222)
+  by 0x400887: frame3() (xml5.cpp:41)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Invalid free() / delete / delete[]</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>222</line>
+      <desc>free</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>42</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+  <annot>
+    <title>Address 0x51D1030 is 0 bytes inside a block of size 40 free&apos;d</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>222</line>
+      <desc>free</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>41</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>all_by_count</folder>
+  <heading>    5 - Invalid free() / delete / delete[]                                   frame3() (xml5.cpp:46)</heading>
+  <body>  at 0x4A190DA: free (vg_replace_malloc.c:222)
+  by 0x4008A3: frame3() (xml5.cpp:46)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Invalid free() / delete / delete[]</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>222</line>
+      <desc>free</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>46</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>all_by_count</folder>
+  <heading>    5 - Mismatched free() / delete / delete []                               frame3() (xml5.cpp:63)</heading>
+  <body>  at 0x4A192A8: operator delete(void*) (vg_replace_malloc.c:229)
+  by 0x400947: frame3() (xml5.cpp:63)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+Address 0x51D19A8 is 0 bytes inside a block of size 396 alloc&apos;d
+  at 0x4A18D27: operator new[](unsigned long) (vg_replace_malloc.c:188)
+  by 0x40093A: frame3() (xml5.cpp:62)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Mismatched free() / delete / delete []</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>229</line>
+      <desc>operator delete(void*)</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>63</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+  <annot>
+    <title>Address 0x51D19A8 is 0 bytes inside a block of size 396 alloc&apos;d</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>188</line>
+      <desc>operator new[](unsigned long)</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>62</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>all_by_count</folder>
+  <heading>    1 - Invalid read of size 4                                               frame3() (xml5.cpp:19)</heading>
+  <body>  at 0x4007F9: frame3() (xml5.cpp:19)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+Address 0x51D1B94 is 4 bytes after a block of size 40 alloc&apos;d
+  at 0x4A1895E: malloc (vg_replace_malloc.c:149)
+  by 0x4007CA: frame3() (xml5.cpp:13)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Invalid read of size 4</title>
+    <site>
+      <file>xml5.cpp</file>
+      <line>19</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+  <annot>
+    <title>Address 0x51D1B94 is 4 bytes after a block of size 40 alloc&apos;d</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>149</line>
+      <desc>malloc</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>13</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>all_by_count</folder>
+  <heading>    1 - Invalid read of size 4                                               frame3() (xml5.cpp:22)</heading>
+  <body>  at 0x400811: frame3() (xml5.cpp:22)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+Address 0x51D2500 is 8 bytes after a block of size 40 alloc&apos;d
+  at 0x4A1895E: malloc (vg_replace_malloc.c:149)
+  by 0x4007CA: frame3() (xml5.cpp:13)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>Invalid read of size 4</title>
+    <site>
+      <file>xml5.cpp</file>
+      <line>22</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+  <annot>
+    <title>Address 0x51D2500 is 8 bytes after a block of size 40 alloc&apos;d</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>149</line>
+      <desc>malloc</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>13</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>all_by_count</folder>
+  <heading>    1 - Syscall param exit_group(exit_code) contains uninitialised byte(s)   _Exit (in /lib64/tls/libc-2.3.4.so)</heading>
+  <body>  at 0x502C4DA: _Exit (in /lib64/tls/libc-2.3.4.so)
+  by 0x4FCDCBA: exit (in /lib64/tls/libc-2.3.4.so)
+  by 0x4FB94C1: (below main) (in /lib64/tls/libc-2.3.4.so)
+</body>
+  <annot>
+    <title>Syscall param exit_group(exit_code) contains uninitialised byte(s)</title>
+    <site>
+      <desc>_Exit</desc>
+    </site>
+    <site>
+      <desc>exit</desc>
+    </site>
+    <site>
+      <desc>(below main)</desc>
+    </site>
+  </annot>
+</message>
+<message>
+  <folder>all_in_order</folder>
+  <folder>memcheck_status</folder>
+  <heading>  --- Status: FINISHED  00:00:00:15.668 ---</heading>
+  <annot>
+    <title>Status</title>
+    <site><desc>FINISHED  00:00:00:15.668</desc></site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>all_by_count</folder>
+  <heading>Suppressed error message statistics (messages typically safely ignored)</heading>
+  <body>3         index-not-intercepted-early-enough-HACK-4
+1         strlen-not-intercepted-early-enough-HACK-5
+1         strlen-not-intercepted-early-enough-HACK-4
+1         strlen-not-intercepted-early-enough-HACK-3
+5         dl_relocate_object
+</body>
+</message>
+
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>Leak_DefinitelyLost</folder>
+  <heading>200 bytes in 5 blocks are definitely lost in loss record 1 of 4      frame3() (xml5.cpp:56)</heading>
+  <body>  at 0x4A1895E: malloc (vg_replace_malloc.c:149)
+  by 0x4008F2: frame3() (xml5.cpp:56)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>200 bytes in 5 blocks are definitely lost in loss record 1 of 4</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>149</line>
+      <desc>malloc</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>56</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>Leak_StillReachable</folder>
+  <heading>416 bytes in 1 blocks are still reachable in loss record 2 of 4      frame3() (xml5.cpp:59)</heading>
+  <body>  at 0x4A1895E: malloc (vg_replace_malloc.c:149)
+  by 0x40091F: frame3() (xml5.cpp:59)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>416 bytes in 1 blocks are still reachable in loss record 2 of 4</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>149</line>
+      <desc>malloc</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>59</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>Leak_DefinitelyLost</folder>
+  <heading>2,020 bytes in 5 blocks are definitely lost in loss record 3 of 4    frame3() (xml5.cpp:49)</heading>
+  <body>  at 0x4A1895E: malloc (vg_replace_malloc.c:149)
+  by 0x4008AD: frame3() (xml5.cpp:49)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>2,020 bytes in 5 blocks are definitely lost in loss record 3 of 4</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>149</line>
+      <desc>malloc</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>49</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+
+<message>
+  <folder>all_in_order</folder>
+  <folder>Leak_DefinitelyLost</folder>
+  <heading>2,040 bytes in 5 blocks are definitely lost in loss record 4 of 4    frame3() (xml5.cpp:52)</heading>
+  <body>  at 0x4A1895E: malloc (vg_replace_malloc.c:149)
+  by 0x4008C3: frame3() (xml5.cpp:52)
+  by 0x40095A: frame2() (xml5.cpp:71)
+  by 0x400968: frame1() (xml5.cpp:76)
+  by 0x40098E: main (xml5.cpp:83)
+</body>
+  <annot>
+    <title>2,040 bytes in 5 blocks are definitely lost in loss record 4 of 4</title>
+    <site>
+      <file>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc/vg_replace_malloc.c</file>
+      <line>149</line>
+      <desc>malloc</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>52</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>76</line>
+      <desc>frame1()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>83</line>
+      <desc>main</desc>
+    </site>
+  </annot>
+</message>
+<status>Memcheck exited normally</status>
+
+</tool_gear>

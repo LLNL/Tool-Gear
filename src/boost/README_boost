@@ -1,0 +1,21 @@
+Boost Files
+
+16 September 2004
+
+This directory contains a subset of the boost library that
+implements shared_ptr templates.  Boost is a freely-available
+open source library; see www.boost.org for details.  The source
+code in this directory is covered by the license in the file
+LICENSE_1_0.txt.  Although the Tool Gear project did not write
+and does not support the software in this directory, we have
+included it in the Tool Gear distribution as a convenience for
+users.  You may also download your own copy of the boost library
+and adjust the Makefiles (currenly only in DPCLcollector) to
+point to that.
+
+All the files that Tool Gear needs from this directory are C++
+header files, so nothing here needs to be compiled separately or
+linked explicitly into an executable.
+
+The files in this directory are extracted from boost version
+1.31.0.

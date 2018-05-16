@@ -1,0 +1,5 @@
+For demo of Tool Gear's GUI for Umpire (MPI correctness tool),
+run in demos/umpire:
+
+./umpireview *.xml
+

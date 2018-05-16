@@ -1,0 +1,72 @@
+<message_folder>
+<tag>unreleased_datatypes</tag>
+<title>Unreleased MPI Datatypes</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>redundant_type_frees</tag>
+<title>Redundant Type Frees</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>reused_type_handles</tag>
+<title>Reused Type Handles</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>uncommitted_dtypes</tag>
+<title>Communications with Uncommitted Types</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>unreleased_groups</tag>
+<title>Unreleased MPI Groups</title>
+<if_empty>disable</if_empty>
+</message_folder>
+
+<message_folder>
+<tag>redundnat_group_frees</tag>
+<title>Redundant Group Frees</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>reused_group_handles</tag>
+<title>Reused Group Handles</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>unreleased_errhandlers</tag>
+<title>Unreleased MPI Errhandlers</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>redundant_errhandler_frees</tag>
+<title>Redundant Errhandler Frees</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>reused_errhandler_handles</tag>
+<title>Reused Errhandler Handles</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>unreleased_reduce_ops</tag>
+<title>Unreleased MPI Reduce Operators</title>
+<if_empty>disable</if_empty>
+</message_folder>
+
+<message_folder>
+<tag>redundant_op_frees</tag>
+<title>Redundant MPI_Op Frees</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>reused_op_handles</tag>
+<title>Reused MPI_Op Handles</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>send_overwrites</tag>
+<title>Send Overwrites</title>
+<if_empty>disable</if_empty>
+</message_folder>

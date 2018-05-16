@@ -1,0 +1,5 @@
+#!dpclcol.so
+pack_and_send_action_attr__FPCcPCcPCci
+pack_and_send_data_attr__FPCcPCcPCciT4
+AddAction
+TG_flush

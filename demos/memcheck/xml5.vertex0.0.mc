@@ -1,0 +1,908 @@
+<?xml version="1.0"?>
+
+<valgrindoutput>
+
+<protocolversion>2</protocolversion>
+
+<preamble>
+  <line>Memcheck, a memory error detector.</line>
+  <line>Copyright (C) 2002-2005, and GNU GPL'd, by Julian Seward et al.</line>
+  <line>Using LibVEX rev 1600, a library for dynamic binary translation.</line>
+  <line>Copyright (C) 2004-2005, and GNU GPL'd, by OpenWorks LLP.</line>
+  <line>Using valgrind-3.2.0.SVN-1600-5778, a dynamic binary instrumentation framework.</line>
+  <line>Copyright (C) 2000-2005, and GNU GPL'd, by Julian Seward et al.</line>
+</preamble>
+
+<pid>18066</pid>
+<ppid>18049</ppid>
+<tool>memcheck</tool>
+<usercomment><hostname>vertex0</hostname><date>Fri Apr 28 13:19:50 PDT 2006</date></usercomment>
+
+<args>
+  <vargv>
+    <exe>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/bin/valgrind</exe>
+    <arg>--tool=memcheck</arg>
+    <arg>--xml=yes</arg>
+    <arg>--log-file-exactly=xml5.vertex0.0.mc</arg>
+    <arg>-v</arg>
+    <arg>--workaround-gcc296-bugs=yes</arg>
+    <arg>--error-limit=no</arg>
+    <arg>--leak-check=full</arg>
+    <arg>--show-reachable=yes</arg>
+    <arg>--xml-user-comment=&lt;hostname&gt;vertex0&lt;/hostname&gt;&lt;date&gt;Fri Apr 28 13:19:50 PDT 2006&lt;/date&gt;</arg>
+  </vargv>
+  <argv>
+    <exe>xml5</exe>
+  </argv>
+</args>
+
+<status>
+  <state>RUNNING</state>
+  <time>00:00:00:00.153</time>
+</status>
+
+<error>
+  <unique>0xB</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x4007E3</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>16</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x51D105C is 4 bytes after a block of size 40 alloc'd</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4A1895E</ip>
+      <obj>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/lib/valgrind/amd64-linux/vgpreload_memcheck.so</obj>
+      <fn>malloc</fn>
+      <dir>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>149</line>
+    </frame>
+    <frame>
+      <ip>0x4007CA</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>13</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0xC</unique>
+  <tid>1</tid>
+  <kind>UninitCondition</kind>
+  <what>Conditional jump or move depends on uninitialised value(s)</what>
+  <stack>
+    <frame>
+      <ip>0x40082E</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>27</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0xF</unique>
+  <tid>1</tid>
+  <kind>UninitValue</kind>
+  <what>Use of uninitialised value of size 8</what>
+  <stack>
+    <frame>
+      <ip>0x400879</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>37</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x10</unique>
+  <tid>1</tid>
+  <kind>InvalidFree</kind>
+  <what>Invalid free() / delete / delete[]</what>
+  <stack>
+    <frame>
+      <ip>0x4A190DA</ip>
+      <obj>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/lib/valgrind/amd64-linux/vgpreload_memcheck.so</obj>
+      <fn>free</fn>
+      <dir>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>222</line>
+    </frame>
+    <frame>
+      <ip>0x400890</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>42</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x51D1030 is 0 bytes inside a block of size 40 free'd</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4A190DA</ip>
+      <obj>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/lib/valgrind/amd64-linux/vgpreload_memcheck.so</obj>
+      <fn>free</fn>
+      <dir>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>222</line>
+    </frame>
+    <frame>
+      <ip>0x400887</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>41</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x11</unique>
+  <tid>1</tid>
+  <kind>InvalidFree</kind>
+  <what>Invalid free() / delete / delete[]</what>
+  <stack>
+    <frame>
+      <ip>0x4A190DA</ip>
+      <obj>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/lib/valgrind/amd64-linux/vgpreload_memcheck.so</obj>
+      <fn>free</fn>
+      <dir>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>222</line>
+    </frame>
+    <frame>
+      <ip>0x4008A3</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>46</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x7FEFFFC8C is on thread 1's stack</auxwhat>
+</error>
+
+<error>
+  <unique>0x12</unique>
+  <tid>1</tid>
+  <kind>MismatchedFree</kind>
+  <what>Mismatched free() / delete / delete []</what>
+  <stack>
+    <frame>
+      <ip>0x4A192A8</ip>
+      <obj>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/lib/valgrind/amd64-linux/vgpreload_memcheck.so</obj>
+      <fn>operator delete(void*)</fn>
+      <dir>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>229</line>
+    </frame>
+    <frame>
+      <ip>0x400947</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>63</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x51D19A8 is 0 bytes inside a block of size 396 alloc'd</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4A18D27</ip>
+      <obj>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/lib/valgrind/amd64-linux/vgpreload_memcheck.so</obj>
+      <fn>operator new[](unsigned long)</fn>
+      <dir>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>188</line>
+    </frame>
+    <frame>
+      <ip>0x40093A</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>62</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x14</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x4007F9</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>19</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x51D1B94 is 4 bytes after a block of size 40 alloc'd</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4A1895E</ip>
+      <obj>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/lib/valgrind/amd64-linux/vgpreload_memcheck.so</obj>
+      <fn>malloc</fn>
+      <dir>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>149</line>
+    </frame>
+    <frame>
+      <ip>0x4007CA</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>13</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x1D</unique>
+  <tid>1</tid>
+  <kind>InvalidRead</kind>
+  <what>Invalid read of size 4</what>
+  <stack>
+    <frame>
+      <ip>0x400811</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>22</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+  <auxwhat>Address 0x51D2500 is 8 bytes after a block of size 40 alloc'd</auxwhat>
+  <stack>
+    <frame>
+      <ip>0x4A1895E</ip>
+      <obj>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/lib/valgrind/amd64-linux/vgpreload_memcheck.so</obj>
+      <fn>malloc</fn>
+      <dir>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>149</line>
+    </frame>
+    <frame>
+      <ip>0x4007CA</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>13</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x35</unique>
+  <tid>1</tid>
+  <kind>SyscallParam</kind>
+  <what>Syscall param exit_group(exit_code) contains uninitialised byte(s)</what>
+  <stack>
+    <frame>
+      <ip>0x502C4DA</ip>
+      <obj>/lib64/tls/libc-2.3.4.so</obj>
+      <fn>_Exit</fn>
+    </frame>
+    <frame>
+      <ip>0x4FCDCBA</ip>
+      <obj>/lib64/tls/libc-2.3.4.so</obj>
+      <fn>exit</fn>
+    </frame>
+    <frame>
+      <ip>0x4FB94C1</ip>
+      <obj>/lib64/tls/libc-2.3.4.so</obj>
+      <fn>(below main)</fn>
+    </frame>
+  </stack>
+</error>
+
+<errorcounts>
+  <pair>
+    <count>1</count>
+    <unique>0x35</unique>
+  </pair>
+  <pair>
+    <count>5</count>
+    <unique>0x12</unique>
+  </pair>
+  <pair>
+    <count>5</count>
+    <unique>0x11</unique>
+  </pair>
+  <pair>
+    <count>5</count>
+    <unique>0x10</unique>
+  </pair>
+  <pair>
+    <count>5</count>
+    <unique>0xF</unique>
+  </pair>
+  <pair>
+    <count>15</count>
+    <unique>0xC</unique>
+  </pair>
+  <pair>
+    <count>5</count>
+    <unique>0xB</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x1D</unique>
+  </pair>
+  <pair>
+    <count>1</count>
+    <unique>0x14</unique>
+  </pair>
+</errorcounts>
+
+<status>
+  <state>FINISHED</state>
+  <time>00:00:00:15.668</time>
+</status>
+
+<suppcounts>
+  <pair>
+    <count>3</count>
+    <name>index-not-intercepted-early-enough-HACK-4</name>
+  </pair>
+  <pair>
+    <count>1</count>
+    <name>strlen-not-intercepted-early-enough-HACK-5</name>
+  </pair>
+  <pair>
+    <count>1</count>
+    <name>strlen-not-intercepted-early-enough-HACK-4</name>
+  </pair>
+  <pair>
+    <count>1</count>
+    <name>strlen-not-intercepted-early-enough-HACK-3</name>
+  </pair>
+  <pair>
+    <count>5</count>
+    <name>dl_relocate_object</name>
+  </pair>
+</suppcounts>
+
+<error>
+  <unique>0x36</unique>
+  <tid>1</tid>
+  <kind>Leak_DefinitelyLost</kind>
+  <what>200 bytes in 5 blocks are definitely lost in loss record 1 of 4</what>
+  <leakedbytes>200</leakedbytes>
+  <leakedblocks>5</leakedblocks>
+  <stack>
+    <frame>
+      <ip>0x4A1895E</ip>
+      <obj>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/lib/valgrind/amd64-linux/vgpreload_memcheck.so</obj>
+      <fn>malloc</fn>
+      <dir>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>149</line>
+    </frame>
+    <frame>
+      <ip>0x4008F2</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>56</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x37</unique>
+  <tid>1</tid>
+  <kind>Leak_StillReachable</kind>
+  <what>416 bytes in 1 blocks are still reachable in loss record 2 of 4</what>
+  <leakedbytes>416</leakedbytes>
+  <leakedblocks>1</leakedblocks>
+  <stack>
+    <frame>
+      <ip>0x4A1895E</ip>
+      <obj>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/lib/valgrind/amd64-linux/vgpreload_memcheck.so</obj>
+      <fn>malloc</fn>
+      <dir>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>149</line>
+    </frame>
+    <frame>
+      <ip>0x40091F</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>59</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x38</unique>
+  <tid>1</tid>
+  <kind>Leak_DefinitelyLost</kind>
+  <what>2,020 bytes in 5 blocks are definitely lost in loss record 3 of 4</what>
+  <leakedbytes>2020</leakedbytes>
+  <leakedblocks>5</leakedblocks>
+  <stack>
+    <frame>
+      <ip>0x4A1895E</ip>
+      <obj>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/lib/valgrind/amd64-linux/vgpreload_memcheck.so</obj>
+      <fn>malloc</fn>
+      <dir>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>149</line>
+    </frame>
+    <frame>
+      <ip>0x4008AD</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>49</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+</error>
+
+<error>
+  <unique>0x39</unique>
+  <tid>1</tid>
+  <kind>Leak_DefinitelyLost</kind>
+  <what>2,040 bytes in 5 blocks are definitely lost in loss record 4 of 4</what>
+  <leakedbytes>2040</leakedbytes>
+  <leakedblocks>5</leakedblocks>
+  <stack>
+    <frame>
+      <ip>0x4A1895E</ip>
+      <obj>/usr/global/tools/valgrind/chaos_3_x86_64/3.2.0beta/lib/valgrind/amd64-linux/vgpreload_memcheck.so</obj>
+      <fn>malloc</fn>
+      <dir>/usr/local/tools/valgrind/3.2.0beta/coregrind/m_replacemalloc</dir>
+      <file>vg_replace_malloc.c</file>
+      <line>149</line>
+    </frame>
+    <frame>
+      <ip>0x4008C3</ip>
+      <obj>./xml5</obj>
+      <fn>frame3()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>52</line>
+    </frame>
+    <frame>
+      <ip>0x40095A</ip>
+      <obj>./xml5</obj>
+      <fn>frame2()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>71</line>
+    </frame>
+    <frame>
+      <ip>0x400968</ip>
+      <obj>./xml5</obj>
+      <fn>frame1()</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>76</line>
+    </frame>
+    <frame>
+      <ip>0x40098E</ip>
+      <obj>./xml5</obj>
+      <fn>main</fn>
+      <dir>.</dir>
+      <file>xml5.cpp</file>
+      <line>83</line>
+    </frame>
+  </stack>
+</error>
+
+</valgrindoutput>
+

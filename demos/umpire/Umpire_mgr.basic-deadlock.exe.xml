@@ -1,0 +1,186 @@
+<message_folder>
+<tag>deadlock_detected</tag>
+<title>Deadlock Detected</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message>
+<folder>deadlock_detected</folder>
+<heading>Deadlock information</heading>
+<body>
+MGR DEADLOCK Q HEADS --------------------
+	-----TASK 0 -----
+	0/2/10000430: 1102 MPI_Recv pre 
+	umpi_op_ref_count = 4
+	buf = 804396832
+	count = 128
+	datatype = 8
+	source = 1
+	tag = 0
+	comm = 0
+	status->MPI_SOURCE = 804396368
+	-----TASK 1 -----
+	1/2/10000490: 1102 MPI_Recv pre 
+	umpi_op_ref_count = 3
+	buf = 804396320
+	count = 128
+	datatype = 8
+	source = 0
+	tag = 0
+	comm = 0
+	status->MPI_SOURCE = 804396368
+</body>
+<annot>
+<title>MPI_Recv on P0</title>
+<site>
+<file>basic-deadlock.c</file>
+<line>39</line>
+<desc>.main</desc>
+</site>
+<site>
+<file>crt0main.s</file>
+<line>0</line>
+<desc>[unknown]</desc>
+</site>
+</annot>
+<annot>
+<title>MPI_Recv on P1</title>
+<site>
+<file>basic-deadlock.c</file>
+<line>47</line>
+<desc>.main</desc>
+</site>
+<site>
+<file>crt0main.s</file>
+<line>0</line>
+<desc>[unknown]</desc>
+</site>
+</annot>
+</message>
+<message_folder>
+<tag>lost_comms</tag>
+<title>Unfreed Communicators</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>redundant_comm_frees</tag>
+<title>Communicators Freed Redundantly</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>type_mismatches</tag>
+<title>Type Mismatches</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>bad_type_handles</tag>
+<title>Bad Type Handles</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>extra_type_commits</tag>
+<title>Redundant Type Commits</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>incompatible_types</tag>
+<title>Incompatible Types for MPI_Op</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>unfreed_persistent_reqs</tag>
+<title>Unfreed Persistent Requests</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>lost_reqs</tag>
+<title>Unfreed MPI_Requests</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>dropped_reqs</tag>
+<title>Dropped Requests</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message>
+<folder>dropped_reqs</folder>
+<heading>1 occurence at basic-deadlock.c: 39 (.main) (MPI_COMM_WORLD rank 0)</heading>
+<body>
+	0/2/10000430: 1102 MPI_Recv pre 
+	umpi_op_ref_count = 3
+	buf = 804396832
+	count = 128
+	datatype = 8
+	source = 1
+	tag = 0
+	comm = 0
+	status->MPI_SOURCE = 804396368
+
+</body>
+<annot>
+<title>MPI_Recv on P0, 1 time</title>
+<site>
+<file>basic-deadlock.c</file>
+<line>39</line>
+<desc>.main</desc>
+</site>
+<site>
+<file>crt0main.s</file>
+<line>0</line>
+<desc>[unknown]</desc>
+</site>
+</annot>
+</message>
+<message>
+<folder>dropped_reqs</folder>
+<heading>1 occurence at basic-deadlock.c: 47 (.main) (MPI_COMM_WORLD rank 1)</heading>
+<body>
+	1/2/10000490: 1102 MPI_Recv pre 
+	umpi_op_ref_count = 3
+	buf = 804396320
+	count = 128
+	datatype = 8
+	source = 0
+	tag = 0
+	comm = 0
+	status->MPI_SOURCE = 804396368
+
+</body>
+<annot>
+<title>MPI_Recv on P1, 1 time</title>
+<site>
+<file>basic-deadlock.c</file>
+<line>47</line>
+<desc>.main</desc>
+</site>
+<site>
+<file>crt0main.s</file>
+<line>0</line>
+<desc>[unknown]</desc>
+</site>
+</annot>
+</message>
+<message_folder>
+<tag>bad_request_frees</tag>
+<title>Bad Handles for Freed Requests</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>incomplete_request_frees</tag>
+<title>Active Requests Freed</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>bad_request_handles</tag>
+<title>Other Bad Request Handles</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>bad_activations</tag>
+<title>Bad Activations</title>
+<if_empty>disable</if_empty>
+</message_folder>
+<message_folder>
+<tag>bad_reactivations</tag>
+<title>Bad Reactivations</title>
+<if_empty>disable</if_empty>
+</message_folder>

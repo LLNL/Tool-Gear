@@ -1,0 +1,22 @@
+This directory contains demos of the Tool Gear XML interface (TGui).
+TGui drives the Tool Gear GUI using the XML in the .tgui files.
+See Docs/xml-interface.txt for a description of the XML in the .tgui files.
+
+1) Demo of mpiP's GUI (MPI profiling tool):
+
+./TGui mpip_example.tgui
+
+
+2) Demo of Valgrind's Memcheck GUI (Memory checking tool):
+
+./TGui memcheck_example.tgui
+
+
+3) Demo of Umpire's GUI (MPI correctness tool):
+
+./TGui umpire_example.tgui
+
+
+4) Small .tgui example (to aid in learning the Tool Gear XML format):
+
+./TGui small_example.tgui

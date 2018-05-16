@@ -1,0 +1,254 @@
+#!/bin/sh -f
+# **************************************************************************
+#  Tool Gear (www.llnl.gov/CASC/tool_gear)
+#  Version 2.02                                                 Sept 8, 2006
+#  Please see COPYRIGHT AND LICENSE information at the end of this file.
+# **************************************************************************
+# Displays a Tool Gear based GUI interface for Valgrind Memcheck output files
+# (in XML mode, need Valgrind option --xml=yes).
+# 
+# Created by John Gyllenhaal May 2005
+
+# Specify the install location for toolgear, if not specified in environment
+if [ "$TGROOT" = "" ]; then
+    TGROOT="/g/g0/gyllen/svn/toolgear"
+else
+    echo "Warning: Using Tool Gear built in '$TGROOT'"
+fi
+
+# Initially assume arguments are invalid
+ARGS_VALID=0;
+
+# Process arguments, if there are any
+if [ $# -ge 1 ]; then
+  # Get the file name we are to process, if arguments
+  MCFILE="$1"
+  shift;
+
+  # Make sure filename actually exists
+  if [ ! -f $MCFILE ]; then
+     echo " "
+     echo "Error: Memcheck XML file '$MCFILE' not found!";
+     echo " "
+
+  # Make sure filename is readable
+  elif [ ! -r $MCFILE ]; then
+     echo " "
+     echo "Error: Unable to read '$MCFILE' due to file permissions!";
+     echo " "
+  # If get here, XML_FILE must be valid
+  else 
+     # Assume arguments are valid if got here, but may change mind below
+     ARGS_VALID=1;
+  fi
+fi
+
+# If there are still arguments left, punt
+if [ $# -ge 1 ]; then
+   echo " "
+   echo "Error: Unexpected argument '$1'!";
+   echo " "
+   ARGS_VALID=0;
+fi
+
+# Need DISPLAY set to work, warn if arguments still valid
+if [ $ARGS_VALID -eq 1 -a "$DISPLAY" = "" ]; then
+    echo " "
+    echo "Error: DISPLAY environment variable not set.   Required by memcheckview!"
+    echo " "
+    ARGS_VALID=0
+fi
+
+# Print usage if no arguments or invalid file
+if [ $ARGS_VALID -eq 0 ]; then
+   echo "Usage: memcheckview memcheck_output_file";
+   echo " "
+   echo "  Displays a Tool-Gear-based GUI interface for Valgrind's Memcheck output files"
+   echo "  that were generated in XML format (--xml=yes).  May be run on an xml file"
+   echo "  that valgrind is currently generating (behaves like tail -f)."
+   echo " "
+   echo "  Valgrind's web site is valgrind.org"
+   echo " "
+   echo "  Memcheckview's user guide can be found at www.llnl.gov/computing/memcheck"
+   echo "  Memcheckview is part of Tool Gear version 2.02"
+   echo "  Tool Gear's web site is www.llnl.gov/CASC/tool_gear"
+   echo " "
+   echo "  Please direct questions, bug reports, and feedback on memcheckview"
+   echo "  to either John Gyllenhaal (gyllen@llnl.gov) or John May (johnmay@llnl.gov)"
+   exit 1;
+fi
+
+# Make sure TGROOT configured correctly 
+if [ ! -d ${TGROOT} ]; then
+    echo "memcheckview configuration error: TGROOT set to invalid directory:"
+    echo "   '${TGROOT}'"
+    echo "Please update memcheckview's TGROOT with the Tool Gear installation directory!
+"
+    exit 1;
+fi
+
+# Get path to Tool Gear's xml-interface-based GUI
+TGUI="${TGROOT}/bin/TGui"
+
+# Make sure TGui exists
+if [ ! -x ${TGUI} ]; then
+  echo "memcheckview configuration error: TGui not found at:"
+  echo "   '${CLIENT}'"
+  echo "Please update memcheckview's TGROOT with the Tool Gear installation directory!"
+  exit 1;
+fi
+
+# Get path to memcheck xml to Tool Gear xml too
+MEMCHECK2XML="${TGROOT}/bin/TGmemcheck2xml";
+
+# Make sure MEMCHECK2XML exists
+if [ ! -x ${MEMCHECK2XML} ]; then
+    echo "memecheckview configuration error: TGmemeched2xml executable not found at:"
+    echo "   '${MEMCHECK2XML}'"
+    echo "Please update mpipview's TGROOT with the Tool Gear installation directory!"
+    exit 1;
+fi
+
+# Pick unique temp file name in current directory (use basename to remove path)
+MCFILE_BASE=`basename ${MCFILE}`
+TGTMP="${MCFILE_BASE}.$$.tgui"
+
+# Make sure tmp file doesn't exist in cwd!
+if [ -f $TGTMP ]; then
+  echo "Error: memcheckview temp file '$TGTMP' already exists, exiting!"
+  exit 1
+fi
+
+# Create empty temp file for GUI to monitor
+TOUCH1=`touch $TGTMP 2>&1`
+
+# If cannot write to current directory, try $TMPDIR, $TMP or /tmp
+if [ $? -ne 0 ]; then
+  # Use $TMPDIR as prefix, if defined
+  if [ "$TMPDIR" != "" ]; then
+     TGTMPDIR=${TMPDIR}
+
+  # If $TMPDIR not defined, try $TMP
+  elif [ "$TMP" != "" ]; then
+     TGTMPDIR=${TMP}
+
+  # If neither $TMPDIR or $TMP defined, fall back to /tmp
+  else
+     TGTMPDIR="/tmp"
+  fi
+ 
+  # Create new path with the temp dir we found, using basename of TGTMP
+  # since user may have used path to input file
+  TGTMPBASE=`basename ${TGTMP}`
+  NEWTGTMP="${TGTMPDIR}/${TGTMPBASE}"
+
+  # Make sure tmp file doesn't already exist for some reason
+  if [ -f $NEWTGTMP ]; then
+    echo "Error: memcheckview temp file '$NEWTGTMP' already exists, exiting!"
+    exit 1
+  fi
+
+  # Create empty temp file in $NEWTGTMP for GUI to monitor
+  TOUCH2=`touch $NEWTGTMP 2>&1`
+ 
+  # If it worked creating file in $TGTMPDIR, use that path
+  if [ $? -eq 0 ]; then
+      TGTMP=${NEWTGTMP}
+
+  # Otherwise, punt, failed in two locations.
+  else
+     echo "Error: Unable to create memcheckview temp file '$TGTMP' in"
+     echo " " `pwd` "or ${TGTMPDIR}."
+     echo "  ${TOUCH1}"
+     echo "  ${TOUCH2}"
+     echo "  Exiting!"
+     exit 1
+  fi
+fi
+
+
+# Start of memcheck to tool gear XML in background
+$MEMCHECK2XML $MCFILE $TGTMP&
+
+# Start GUI in fg, have it remove TGTMP as soon as GUI starts
+# Need to use add args from $@ only if they exist because old version of
+# Tru64 /bin/sh inserts an empty string in argv if $@ is empty
+if [ $# -ge 1 ]; then
+   $TGUI $TGTMP -unlink "$@"
+   TGUIRET=$?
+else
+   $TGUI $TGTMP -unlink
+   TGUIRET=$?
+fi
+
+# GUI exited, kill off memcheck2xml tool if still running
+kill %% > /dev/null 2>&1
+
+# Remove temp file (should be removed by -unlink option above)
+rm -f $TGTMP
+
+# Return TGui's return code
+exit $TGUIRET
+################################################################################
+# COPYRIGHT AND LICENSE
+# 
+# Copyright (c) 2006, The Regents of the University of California.
+# Produced at the Lawrence Livermore National Laboratory
+# Written by John Gyllenhaal (gyllen@llnl.gov), John May (johnmay@llnl.gov),
+# and Martin Schulz (schulz6@llnl.gov).
+# UCRL-CODE-220834.
+# All rights reserved.
+# 
+# This file is part of Tool Gear.  For details, see www.llnl.gov/CASC/tool_gear.
+# 
+# Redistribution and use in source and binary forms, with or
+# without modification, are permitted provided that the following
+# conditions are met:
+# 
+# * Redistributions of source code must retain the above copyright
+#   notice, this list of conditions and the disclaimer below.
+# 
+# * Redistributions in binary form must reproduce the above copyright
+#   notice, this list of conditions and the disclaimer (as noted below) in
+#   the documentation and/or other materials provided with the distribution.
+# 
+# * Neither the name of the UC/LLNL nor the names of its contributors may
+#   be used to endorse or promote products derived from this software without
+#   specific prior written permission.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
+# PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS OF THE UNIVERSITY 
+# OF CALIFORNIA, THE U.S. DEPARTMENT OF ENERGY OR CONTRIBUTORS BE LIABLE 
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+# OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
+# EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# 
+# ADDITIONAL BSD NOTICE
+# 
+# 1. This notice is required to be provided under our contract with the 
+#    U.S. Department of Energy (DOE). This work was produced at the 
+#    University of California, Lawrence Livermore National Laboratory 
+#    under Contract No. W-7405-ENG-48 with the DOE.
+# 
+# 2. Neither the United States Government nor the University of California 
+#    nor any of their employees, makes any warranty, express or implied, 
+#    or assumes any liability or responsibility for the accuracy, completeness,
+#    or usefulness of any information, apparatus, product, or process disclosed,
+#    or represents that its use would not infringe privately-owned rights.
+# 
+# 3. Also, reference herein to any specific commercial products, process,
+#    or services by trade name, trademark, manufacturer or otherwise does not
+#    necessarily constitute or imply its endorsement, recommendation, or
+#    favoring by the United States Government or the University of California.
+#    The views and opinions of authors expressed herein do not necessarily
+#    state or reflect those of the United States Government or the University
+#    of California, and shall not be used for advertising or product
+#    endorsement purposes.
+################################################################################
+

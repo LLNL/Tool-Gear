@@ -1,0 +1,8 @@
+The following subdirectories contain these demos:
+
+TGui      Tool Gear's XML format demo (for mpip, memcheck, and umpire)
+
+mpip      The MpiP demo (light-weight MPI profiling tool)
+memcheck  The Valgrind Memcheck demo (memory checker)
+umpire    The Umpire demo (MPI correctness tool)
+

@@ -1,0 +1,12 @@
+For demo of Tool Gear's GUI for Valgrind's Memcheck (memory checker, 
+valgrind.org), run in demos/memcheck:
+
+./memcheckview xml5.vertex0.0.mc
+
+For demo of Tool Gear's GUI for Valgrind's Memcheck with Valgrinds MPI wrappers
+and generated with memcheck_all, run in demos/memcheck:
+
+./memcheckview mpi_vg_demo2.95944.0.mc
+
+This is the MPI demo output used in the LLNL Valgrind help guide at
+http://www.llnl.gov/icc/lc/DEG/valgrind/

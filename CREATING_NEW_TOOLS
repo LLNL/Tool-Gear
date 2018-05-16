@@ -1,0 +1,640 @@
+Created 12/20/05 by John Gyllenhaal (gyllen@llnl.gov)
+
+This documentation on how to create new Tool-Gear-based tools assumes you have
+installed the full Tool Gear 2.00 tar ball (which includes mpipview,
+memcheckview, umpireview, TGui and their respective demos subdirectories).  
+This tarball is available for free download at www.llnl.gov/CASC/tool_gear.
+
+Some of the demos mentioned in the documentation will not be available if 
+this is not the case.
+
+
+Tool Gear's XML Interface
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+With the release of Tool Gear 2.00, XML became the recommended (and primary)
+mechanism for driving the Tool Gear message viewer GUI.  The intention was
+to provide an easily generated, stable input format for the class of tools
+the Tool Gear GUI is well suited for.
+
+Design goals
+~~~~~~~~~~~~
+
+* An easy-to-generate XML input format that provides the desired features 
+  to a tool writer so they can generate a good GUI interface for their tool
+  in an afternoon or two. 
+
+* To be language agnostic.   No need to link to anything provided by Tool Gear,
+  so the tool can be written in any language, including scripting languages.
+  The tool can generate Tool Gear XML directly (e.g., Umpire) or can convert
+  from their own format (e.g., MpiP's text output and Valgrind's Memcheck XML
+  format) to TG's XML.
+
+* Support incremental XML output by the Tool and incrementally display new
+  messages in the GUI as soon as each XML snippet is complete enough to 
+  process (e.g., Used by Valgrind's Memcheck GUI memcheckview).  
+
+* Completely hide from the tool user that the Tool Gear XML interface exists 
+  and make the tool's information the focus, not the Tool Gear GUI.
+
+* Have a easily extensible input format so that new features can be added
+  while allowing older tools to work seamlessly with newer version of 
+  Tool Gear GUIs.
+
+* Focus the XML format on the class of tools that fit well with 
+  "email metaphor" used by Tool Gear's message viewer GUI.  The 
+  dynamic instrumentation infrastructure (DynTG) uses a new plugin 
+  model for adding new instrumentation types (instead of an XML interface).
+
+
+Tool Gear's Email Metaphor
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Tool Gear Message Viewer GUI uses an "email metaphor" for displaying the
+tool information to the user.   The user sees one or more "message folders"
+and each message folder contains "messages" from the tool that resemble
+email messages (each has a subject line, body text, and supporting 
+attachments in the form of locations in files related to the message).
+
+We have found that a wide variety of useful information can be communicated
+to the user via this email metaphor, especially if the message folder
+names and message subject lines are chosen with care.   In addition,
+the GUI users are intimately familiar with email interfaces, so there
+is very low learning curve for using the Tool Gear Message Viewer GUI.
+We have found that very low learning curve is key for getting users
+to actually use your tool.
+
+Although there are some classes of tools that really do need specialized
+GUIs (e.g., MPI trace visualization tools, debuggers, etc.), many tools
+can be adapted to the email metaphor in a reasonable and useful way.
+The benefit for tool developers for using Tool Gear's GUI is that a 
+full-functionality GUI can be developed quickly.  It is surprisingly
+time consuming (many months, if not more) to develop a good full featured 
+custom GUI, even with good GUI toolkits like Qt and tcl/tk (as anyone who
+has tried discovers).
+
+
+How to Use Tool Gear's XML Interface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Tool Gear provided script 'TGui' (in Tool_Gear_Dir/bin) sets up a GUI
+based on the contents of XML file (e.g., message.tgui) in Tool Gear's format. 
+
+For post-processing tools, the tool developer typically writes a
+script (e.g., mpipview) that takes in the tool output and displays it in 
+a Tool Gear GUI.  The two main steps (other than error checking) in the 
+script are typically to generate a message file in Tool Gear's XML format 
+and then call TGui on it.
+
+For the Tool Gear provided tool mpipview, the process is essentially:
+
+# Generate Tool Gear XML from mpiP text output
+TGmpip2xml app.mpiP app.mpiP.$$.tgui
+
+# Generate GUI and remove temporary Tool Gear XML file
+TGui app.mpiP.$$.tgui -unlink
+
+The '-unlink' option causes TGui to 'unlink' the input file as soon as 
+possible (right after opening it), so that even if the user kills the GUI,
+the temporary file is always cleaned up (the file is still available for
+reading/writing under Unix until all the programs using it terminate).
+
+Note: TGui works like 'tail -f' and properly handles extra XML being added 
+      to the input file while the GUI is running.   See the Tool Gear
+      provided memcheckview script for an example of how to start up
+      translation processes in background and cleaning up at the end.
+
+
+Example Tool output in the Tool Gear XML format
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Examples are the best way to see how other tools display their information
+using Tool Gear's GUI and we provide sample tool output for three tools
+in Demos/TGui (in Tool Gear's XML format).  The actual tools do not need
+to be installed to view these examples.
+
+All the demos should be run in the Demos/TGui directory.
+
+The MpiP example (light-weight MPI profiling tool, www.llnl.gov/CASC/mpip) 
+output can be viewed by running this command in Demos/TGui:
+
+  ./TGui mpip_example.tgui
+
+The Valgrind Memcheck example (memory checker, valgrind.org) output
+can be viewed by running this command in Demos/TGui:
+
+  ./TGui memcheck_example.tgui
+
+The Umpire example (MPI correctness tool) output can be viewed by
+running this command in Demos/TGui:
+
+   ./TGui umpire_example.tgui
+
+These three example .tgui files are also useful samples of the
+Tool Gear XML format, which is described in the rest of this document.
+
+The other directories in Demos (mpip, umpire, memcheck) contain the tool 
+output that was used to generate these .tgui files.
+
+
+Small Tool Gear XML output example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In Demos/TGui, there is also a very small XML example (small_example.tgui)
+that was created from memcheck_example.tgui.   It may be viewed
+in the Demos/TGui directory by running:
+
+   ./TGui small_example.tgui
+
+Here is the Tool Gear XML contents of small_example.tgui (for reference):
+------------ start small_example.tgui --------------
+<tool_gear><format>1</format><version>2.00</version>
+ 
+<tool_title>MemcheckView - xml5.pengra1.0.mc</tool_title>
+ 
+<status>Reading in xml5.pengra1.0.mc</status>
+ 
+<about>
+  <prepend>Tool Gear 2.00's Valgrind Memcheck View GUI
+Written (using Tool Gear's XML interface) by John Gyllenhaal</prepend>
+</about>
+ 
+<site_priority>
+  <file>vg_replace_malloc.c$</file>  <modifier>-1.0</modifier>
+</site_priority>
+ 
+<message_folder>
+  <tag>all_in_order</tag>
+  <title>Combined memcheck output (in output order)</title>
+  <if_empty>show</if_empty>
+</message_folder>
+ 
+<message>
+  <folder>all_in_order</folder>
+  <heading>Invalid read of size 4             frame3() (xml5.cpp:16)</heading>
+  <body>  at 0x80485BA: frame3() (xml5.cpp:16)
+  by 0x804871E: frame2() (xml5.cpp:71)
+Address 0x1BB3B054 is 4 bytes after a block of size 40 alloc'd
+  at 0x1B8FF88D: malloc (vg_replace_malloc.c:149)
+  by 0x804871E: frame2() (xml5.cpp:71)
+</body>
+  <annot>
+    <title>Invalid read of size 4</title>
+    <site>
+      <file>xml5.cpp</file>
+      <line>16</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+  </annot>
+  <annot>
+    <title>Address 0x1BB3B054 is 4 bytes after a block of size 40 alloc'd</title>
+    <site>
+      <file>./vg_replace_malloc.c</file>
+      <line>149</line>
+      <desc>malloc</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>13</line>
+      <desc>frame3()</desc>
+    </site>
+  </annot>
+</message>
+ 
+<status>Memcheck exited normally</status>
+ 
+</tool_gear>
+------------ end small_example.tgui --------------
+
+The meaning of this Tool Gear XML input is described in the rest of 
+this document.
+
+
+The Tool Gear XML input format
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Tool Gear is designed to accept standard XML (uses Qt's XML parser) but
+despite the XML specification's requirement to silently ignore unknown input, 
+Tool Gear prints warnings the first time it encounters XML tags or input 
+it doesn't expect before ignoring it (so you can easily detect typos and
+semantic errors).   
+
+Also, due to the way Tool Gear incrementally parses the XML input (to support 
+tail -f like functionality), some improperly-formed XML will be accepted 
+(namely, Tool Gear may not detect that the top-level<tool_gear></tool_gear> 
+tag pair is missing or specified multiple times).  If the XML input needs to 
+be verified as perfectly legal XML, you may want to use an XML tool to do that.
+
+You may want to read the XML description in the rest of this document 
+with the XML in Demos/TGui/*.tgui files (see Example Tool Output section 
+above), especially the Demos/TGui/memcheck_example.tgui file which uses
+all the XML features in Tool Gear 2.00.
+
+Comparing the GUI displayed from the contents of memcheck_example.tgui 
+(via ./TGui memcheck_example.tgui in Demos/TGui) with the contents
+of memcheck_example.tgui and this documentation is a good way to 
+learn the Tool Gear XML input format.
+
+All tags in XML are balanced: a <foo> tag is always closed by </foo>.  Hence
+in the description that follows, mention of a tag <foo> implicitly
+means there is a matching closing tag </foo>.
+
+In the format description, symbols in CAPITALS are tool-specific text 
+that need to be filled in by the tool.
+
+The following types of data is used in the TG XML tag documentation below:
+   INT        is a 32-bit signed decimal integer.
+   FLOAT      is a 64-bit signed decimal floating-point number.
+   SINGLELINE is arbitrary text without any newlines.
+   MULTILINE  is arbitrary text that can optionally have newlines in it.
+   REGEXP     is a regular expression in the format the Qt's QRegExp class
+              accepts.  See http://doc.trolltech.com/3.3/qregexp.html for
+              details.
+
+Note: In XML, the "<", ">" and "&" characters are special characters and 
+should be replaced with "&lt;", "&gt;" and "&amp;" respectively to prevent
+parsing errors.   
+
+
+<tool_gear> (Top-Level XML Tag)
+-------------------------------
+
+The first line of the XML input may optionally specify the XML version:
+
+   <?xml version="1.0"?>
+
+All remaining input should be contained within the top-level tag-pair
+<tool_gear> </tool_gear>.  
+
+The following top-level tags are supported by Tool Gear 2.00:
+  *  <format>         specifies Tool Gear XML format expected, currently 1
+  *  <version>        specifies minimal Tool Gear version required to work
+  *  <tool_title>     sets GUI window title
+  *  <status>         sets status line text
+  *  <about>          adds text to about text box
+  *  <site_priority>  modifies file display priorities in the GUI
+  *  <message_folder> declares new message folder
+  *  <message>        creates new message in one or more message folders
+
+The meat of the tool information is specified by the <message> and
+<message_folder> tags and as a result, they have a more complicated 
+structure.
+
+Each of the XML tags summarized above are described individually below.
+Many of the XML tags have subtags, which are also described below.
+
+
+<format>
+--------
+
+The first recommended tag after <tool_gear> is:
+
+   <format>INT</format>
+
+The <format> tag specifies the XML format expected and should be 1 for
+the foreseeable future.  
+
+
+<version>
+---------
+
+The second recommended tag after <tool_gear> is:
+
+   <version>FLOAT</version>
+
+The <version> tag should be the earliest Tool Gear version that has all 
+the features used in the XML (typically just the Tool Gear version used 
+in development).   If these values are newer than expected, Tool Gear 
+generates a warning like:
+
+Warning: Tool Gear Version 1.40 earlier than XML version requirement of 2.00
+         May not parse XML properly!
+
+
+<tool_title>
+------------
+
+The GUI window title may be set with this XML:
+
+  <tool_title>SINGLELINE</tool_title>
+
+Some GUI managers handle multi-line titles intelligently but is probably
+safer to stick with one line.   Title may be specified multiple times,
+updates window title each time one is parsed.
+
+
+<status>
+--------
+
+The GUI status line may be set with this XML;
+
+   <status>SINGLELINE</status>
+
+The status line may be updated multiple times.  Most useful with tools
+using the 'tail -f' features of TGui but it is also useful to indicate that
+the input file has been successfully read in or that the tool completed 
+successfully (if it has).
+
+
+<about>
+-------
+
+Text may be added to the "about" box in the GUI using these subtags:
+
+  * <prepend>    about text to prepend to existing about text
+  * <append>     about text to append to existing about text
+
+These subtags are described below.
+
+The Tool Gear about information always appear last in the about box,
+even if append is used.
+
+
+<about><prepend>
+----------------
+
+   <about><prepend>MULTILINE</prepend>
+
+Prepends the MULTILINE text to the GUI's "about" box text, adding a blank line,
+if about text already exists.
+
+
+<about><append>
+---------------
+
+   <about><append>MULTILINE</append>
+
+Appends the MULTILINE text to the GUI's "about" box text, adding a blank line,
+if about text already exists.
+
+
+<site_priority>
+---------------
+
+Provides tool-specific input on the relative interest of message sites
+for the users (see <message><annot><site> for how message sites are specified).
+
+Message sites are typically used to provide call stack tracebacks for 
+messages.  By default, the first message site specified for a message 
+is displayed when a message is clicked on (typically the top of the call 
+stack).   However, for some tools, the top of the call stack sometimes 
+refers to a location in the tool's instrumentation library, not in the 
+user code (which can be confusing).  Instead of the tool stripping out 
+locations in their instrumentation library, the tool can use 
+site priorities to reduce the display priority for tool instrumentation 
+library locations, so the user's code locations are shown by default.
+
+The site priority needs to have at least one of these subtags specified:
+  * <file>      file name regular expression
+  * <line>      line number regular expression
+  * <desc>      description regular expression
+
+along with this required subtag:
+  * <modifier>  display priority modifier if above regexp(s) match
+
+If all the regular expressions specified by <file>, <line>, and <desc>
+are matched, then the <modifier> with be applied to the display priority.
+
+For example, Valgrind's memcheck tool uses a malloc replacement library
+located in {path}/vg_replace_malloc.c to catch some memory errors, which 
+sometimes appears at the top of the call stack instead of the malloc or 
+free in the user code.  In example 1 below, the display priority for 
+the malloc replacement library is reduced by 1.0 (or -1.0 added to the 
+display priority), so the top user code message site (showing the call
+to malloc or free) is shown first.
+
+Valgrind site_priority example 1: 
+
+  <site_priority> 
+     <file>vg_replace_malloc.c$</file> <modifier>-1.0</modifier>
+  </site_priority>
+
+Valgrind also sometimes detects errors in system libraries that have
+no debug info (i.e., no file name).   Site_priority example 2 below reduces
+the display priority by 10.0 for those message sites where a file name
+is not specified.
+
+Valgrind site_priority example 2:
+
+  <site_priority> 
+    <file>^$</file> <modifier>-10.0</modifier>
+  </site_priority> 
+
+The highest priority message site (with site order breaking ties) will be 
+displayed by default (no matter how low the priority is).
+
+
+<site_priority><file>
+---------------------
+
+   <site_priority><file>REGEXP</file>
+
+Specifies the regular expression to be applied to the file name to
+determine if the <site_priority><modifier> should be applied to the
+display priority.
+
+
+<site_priority><line>
+---------------------
+
+   <site_priority><line>REGEXP</line>
+
+Specifies the regular expression to be applied to the line number to
+determine if the <site_priority><modifier> should be applied to the
+display priority.
+
+
+<site_priority><desc>
+---------------------
+
+   <site_priority><desc>REGEXP</desc>
+
+Specifies the regular expression to be applied to the description to
+determine if the <site_priority><modifier> should be applied to the
+display priority.
+
+
+<site_priority><modifier>
+-------------------------
+
+   <site_priority><modifier>FLOAT</modifier>
+
+Specifies the display priority modifier to apply if the regular expression(s)
+specified for <file>, <line> and <desc> are matched.  Negative modifiers 
+indicate the site is less important.
+
+
+<message_folder>
+----------------
+
+Declares a new message folder, the folder tag, title, and optionally, 
+what to do if their are no messages in the folder.
+
+The message folder declaration must include these required subtags:
+  * <tag>       folder tag used by messages to specify this folder
+  * <title>     title of folder to display in GUI
+
+and may include this optional subtag:
+  * <if_empty>  display policy if folder is empty, defaults to show
+
+
+<message_folder><tag>
+---------------------
+
+  <message_folder><tag>SINGLELINE</tag>
+
+Specifies the folder tag that is used in <message><folder> to specify
+the message folder to place a message in.
+
+
+<message_folder><title>
+-----------------------
+
+  <message_folder><title>SINGLELINE</title>
+
+Specifies the folder title to display in the message viewer.
+
+
+<message_folder><if_empty>
+--------------------------
+
+   <message_folder><if_empty>KEYWORD</if_empty>
+
+Optionally specifies the display policy when the message folder contains no
+messages.   KEYWORD must be one of the following:
+   
+   * show        show empty folders (default)
+   * disable     grey out folder title if empty
+   * hide        hide folder if empty
+  
+
+<message>
+---------
+
+Sends message to one or more message folders.   Each message has a heading 
+and may optionally have a multi-line text body and specify annotations for 
+the message.
+
+Each message must include these required subtags:
+
+  * <folder>    folder to place message in, up to 5 may be specified
+  * <heading>   message heading/subject line
+
+and may include these optional subtags:
+
+  * <body>      multiline contents of message
+  * <annot>     references (typically file and line no) associated with message
+
+Messages are placed in each folder in the order they are encountered in
+the XML file.   For post-processing tools, it is often useful output the
+messages so the most interesting message is first in the XML file.
+
+
+<message><folder>
+-----------------
+
+   <message><folder>SINGLELINE</folder>
+
+The <folder> subtag must be specified at least once in a message and may be
+specified up to 5 times (to place the same message in multiple folders).  
+The SINGLELINE must match a previously declared <message_folder><tag> 
+and the SINGLELINE text specifies the message folder(s) to put the message in.
+
+
+<message><heading>
+------------------
+
+   <message><heading>SINGLELINE</heading>
+
+Specifies the heading or subject for the message (required).   
+Typically a one line summary of the message.
+
+
+<message><body>
+---------------
+
+   <message><body>MULTILINE</body>
+
+Specifies the body text of the message (optional) and may be as many 
+lines as desired.  The body text is only displayed if the user opens
+the message in the GUI (but the heading is always visible).
+
+
+<message><annot>
+----------------
+
+Specifies one or more annotations (typically a file and line number to display)
+to show when this particular message is being viewed.   Each annotation 
+consists of a title (which is shown in a tab) and one or more 'sites' 
+(a combination of a file, line number, and description).  The first
+annotation specified will be initially displayed for the message and 
+the first site specified for an annotation will be shown unless 
+a <site_priority> modifier makes another site higher priority.  
+
+Each <message><annot> should have a title specified ('Traceback' is used if
+it is not specified, for backwards compatibility):
+  * <title>    Title describing the sites lists (appears in annotation tab)
+
+Each <message><annot> may have zero or more sites specified:
+  * <site>     Specified a file, line, and description to display
+ 
+
+<message><annot><title>
+-----------------------
+
+   <message><annot><title>SINGLELINE</title>
+
+The title to display in the tab for the annotation.  Typically the
+title describes the site list.   Defaults to 'Traceback' if not specified
+for backward compatibility.
+
+
+<message><annot><site>
+----------------------
+
+Specifies a combination of a file name, line number, and a description to
+display when the site is specified (description only appears in the combo
+box listing the sites associated with an annotation).
+
+A site includes these optional subtags:
+
+  * <file>     name of file to display
+  * <line>     line number of file to highlight
+  * <desc>     description for this file/line combo (typically function name)
+
+
+<message><annot><site><file>
+----------------------------
+
+<message><annot><site><file>SINGLELINE</file>
+
+Specifies the name of the file to display when this site is selected.
+Tool gear uses the user-specified search path to find the file if
+the file name does not include the full path.
+
+
+<message><annot><site><line>
+----------------------------
+
+<message><annot><site><line>INT</line>
+
+Specifies the line number to center on and highlight in the file displayed.
+The line number is silently ignored if a file name is not specified.
+
+
+<message><annot><site><desc>
+----------------------------
+
+<message><annot><site><desc>SINGLELINE</desc>
+
+Specifies a description (typically a function name, but sometimes just
+an informational message) that is displayed beside the file/line number (if 
+specified) in the site selection combo box.
+
+
+This completes the Tool Gear 2.00 XML format description.

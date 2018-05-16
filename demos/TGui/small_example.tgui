@@ -1,0 +1,62 @@
+<tool_gear><format>1</format><version>2.00</version>
+
+<tool_title>MemcheckView - xml5.pengra1.0.mc</tool_title>
+
+<status>Reading in xml5.pengra1.0.mc</status>
+
+<about>
+  <prepend>Tool Gear 2.00's Valgrind Memcheck View GUI
+Written (using Tool Gear's XML interface) by John Gyllenhaal</prepend>
+</about>
+
+<site_priority>
+  <file>vg_replace_malloc.c$</file>  <modifier>-1.0</modifier>
+</site_priority>
+
+<message_folder>
+  <tag>all_in_order</tag>
+  <title>Combined memcheck output (in output order)</title>
+  <if_empty>show</if_empty>
+</message_folder>
+
+
+<message>
+  <folder>all_in_order</folder>
+  <heading>Invalid read of size 4                                               frame3() (xml5.cpp:16)</heading>
+  <body>  at 0x80485BA: frame3() (xml5.cpp:16)
+  by 0x804871E: frame2() (xml5.cpp:71)
+Address 0x1BB3B054 is 4 bytes after a block of size 40 alloc'd
+  at 0x1B8FF88D: malloc (vg_replace_malloc.c:149)
+  by 0x804871E: frame2() (xml5.cpp:71)
+</body>
+  <annot>
+    <title>Invalid read of size 4</title>
+    <site>
+      <file>xml5.cpp</file>
+      <line>16</line>
+      <desc>frame3()</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>71</line>
+      <desc>frame2()</desc>
+    </site>
+  </annot>
+  <annot>
+    <title>Address 0x1BB3B054 is 4 bytes after a block of size 40 alloc'd</title>
+    <site>
+      <file>./vg_replace_malloc.c</file>
+      <line>149</line>
+      <desc>malloc</desc>
+    </site>
+    <site>
+      <file>xml5.cpp</file>
+      <line>13</line>
+      <desc>frame3()</desc>
+    </site>
+  </annot>
+</message>
+
+<status>Memcheck exited normally</status>
+
+</tool_gear>
